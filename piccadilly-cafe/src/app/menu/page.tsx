@@ -68,7 +68,7 @@ const menuItems: MenuItem[] = [
     name: "كشري ملاذ الفاخر",
     price: 7.50,
     description: "مزيج الكشري المصري الكلاسيكي مع الأرز، العدس، المكرونة، الحمص، والصلصة الحارة والبصل المقرمش.",
-    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1585328051949-3f72f84f999c?auto=format&fit=crop&w=600&q=80",
     category: "lunch",
     calories: "550 سعرة حرارية",
     ingredients: "أرز مصري، عدس بجبة، مكرونة مرمرية، حمص مسلوق، صلصة طماطم بالخل والثوم، تقلية (بصل مقرمش)",
