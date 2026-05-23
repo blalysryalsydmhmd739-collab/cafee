@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+img {
+  object-fit: cover;
+  object-position: center;
+}
+
+body {
+  @apply bg-stone-50 text-stone-900 dark:bg-stone-950 dark:text-stone-50 transition-colors duration-300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold font-arabic;
+}
+
+.dotted-leader {
+  flex-grow: 1;
+  border-bottom: 2px dotted #ccc;
+  margin: 0 10px;
+  position: relative;
+  top: -6px;
+}
+
+.dark .dotted-leader {
+  border-bottom-color: #444;
+}
+
+/* Custom scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-stone-100 dark:bg-stone-900;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-amber-500/50 hover:bg-amber-500 rounded;
+}
+
