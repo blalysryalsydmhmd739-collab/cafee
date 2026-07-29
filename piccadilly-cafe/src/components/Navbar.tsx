@@ -248,7 +248,7 @@ export default function Navbar() {
                         <h4 className="font-bold text-stone-900 dark:text-stone-100 text-sm">{item.name}</h4>
                         <div className="flex items-center justify-between mt-2">
                           <span className="text-sm font-semibold text-amber-600 dark:text-amber-400">
-                            £{(item.price * item.quantity).toFixed(2)}
+                            {(item.price * item.quantity).toFixed(2)} ج.م
                           </span>
                           
                           {/* Quantity selector */}
@@ -282,7 +282,7 @@ export default function Navbar() {
                   <div className="flex justify-between items-center text-stone-950 dark:text-stone-50">
                     <span className="font-semibold">المجموع الإجمالي</span>
                     <span className="text-xl font-bold text-amber-600 dark:text-amber-400">
-                      £{cartTotalAmount.toFixed(2)}
+                      {cartTotalAmount.toFixed(2)} ج.م
                     </span>
                   </div>
                   

@@ -5,9 +5,10 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import MenuFoodImage from "@/components/MenuFoodImage";
 import Footer from "@/components/Footer";
+import Modal from "@/components/Modal";
 import { useCart } from "@/context/CartContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Plus, X, Flame, Scale, ShoppingCart } from "lucide-react";
+import { Search, Plus, Flame, Scale, ShoppingCart } from "lucide-react";
 
 interface MenuItem {
   id: string;
@@ -25,9 +26,9 @@ const menuItems: MenuItem[] = [
   {
     id: "b1",
     name: "فول مدمس بالزيت الحار",
-    price: 4.00,
+    price: 50.00,
     description: "فول بلدي مدمس ببطء مع زيت حار طازج، طحينة، وليمون.",
-    image: "https://images.unsplash.com/photo-1637861004714-49fa0ccbb993?auto=format&fit=crop&w=600&q=80",
+    image: "/images/foul.png",
     category: "breakfast",
     calories: "290 سعرة حرارية",
     ingredients: "فول مدمس، زيت حار، طحينة سمسم، كمون، ثوم، ليمون، ملح",
@@ -35,9 +36,9 @@ const menuItems: MenuItem[] = [
   {
     id: "b2",
     name: "طعمية محشية بالخلطة",
-    price: 3.50,
+    price: 45.00,
     description: "فلافل مصرية مقرمشة محشية بخليط البصل الحار ومغطاة بالسمسم.",
-    image: "https://images.unsplash.com/photo-1593001872095-7d5b3868fb1d?auto=format&fit=crop&w=600&q=80",
+    image: "/images/falafel.png",
     category: "breakfast",
     calories: "210 سعرة حرارية",
     ingredients: "حمص، فول مدشوش، بقدونس، كزبرة، سمسم، شطة حمراء، بصل، ثوم",
@@ -45,7 +46,7 @@ const menuItems: MenuItem[] = [
   {
     id: "b3",
     name: "بيض عيون بالبسطرمة",
-    price: 5.50,
+    price: 80.00,
     description: "بيض مقلي بالسمن البلدي مع قطع البسطرمة الغنية بالثوم.",
     image: "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=600&q=80",
     category: "breakfast",
@@ -55,7 +56,7 @@ const menuItems: MenuItem[] = [
   {
     id: "b4",
     name: "جبنة بيضاء بالطماطم وزيت الزيتون",
-    price: 3.00,
+    price: 40.00,
     description: "جبنة فيتا كريمية مع مكعبات الطماطم، الخيار، والنعناع الطازج وزيت الزيتون البكر.",
     image: "https://images.unsplash.com/photo-1547058881-aa0edd92aab3?auto=format&fit=crop&w=600&q=80",
     category: "breakfast",
@@ -66,9 +67,9 @@ const menuItems: MenuItem[] = [
   {
     id: "l1",
     name: "كشري ملاذ الفاخر",
-    price: 7.50,
+    price: 90.00,
     description: "مزيج الكشري المصري الكلاسيكي مع الأرز، العدس، المكرونة، الحمص، والصلصة الحارة والبصل المقرمش.",
-    image: "https://images.unsplash.com/photo-1585328051949-3f72f84f999c?auto=format&fit=crop&w=600&q=80",
+    image: "/images/koshary.png",
     category: "lunch",
     calories: "550 سعرة حرارية",
     ingredients: "أرز مصري، عدس بجبة، مكرونة مرمرية، حمص مسلوق، صلصة طماطم بالخل والثوم، تقلية (بصل مقرمش)",
@@ -76,17 +77,17 @@ const menuItems: MenuItem[] = [
   {
     id: "l2",
     name: "حواوشي بلدي بالجبنة",
-    price: 6.50,
+    price: 85.00,
     description: "خبز بلدي محشو باللحم المفروم المتبل بالبهارات والنعناع مع طبقة من الموتزاريلا المشوية.",
-    image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+    image: "/images/hawawshi.png",
     category: "lunch",
     calories: "490 سعرة حرارية",
-    ingredients: "لحم بقري مفروم، خبز بلدي، بصل، فلفل أخضر حار، جبنة موتزاريلا، بهارات حواوشي خاصة",
+    ingredients: "لحم بقري مفروم، خبز بلدي, بصل، فلفل أخضر حار، جبنة موتزاريلا، بهارات حواوشي خاصة",
   },
   {
     id: "l3",
     name: "طاجن مكرونة باللحم المفروم",
-    price: 8.50,
+    price: 110.00,
     description: "مكرونة قلم مطهوة في الفرن داخل طاجن فخاري مع صلصة طماطم غنية ولحم مفروم متبل.",
     image: "https://images.unsplash.com/photo-1637861004714-49fa0ccbb993?auto=format&fit=crop&w=600&q=80",
     category: "lunch",
@@ -97,7 +98,7 @@ const menuItems: MenuItem[] = [
   {
     id: "dr1",
     name: "قهوة تركية بالهيل",
-    price: 3.00,
+    price: 40.00,
     description: "قهوة مطحونة ناعمة مطهوة ببطء مع حبات الهيل المطحون ووجه غني كثيف.",
     image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
     category: "drinks",
@@ -107,7 +108,7 @@ const menuItems: MenuItem[] = [
   {
     id: "dr2",
     name: "شاي كشري بالنعناع",
-    price: 2.50,
+    price: 30.00,
     description: "شاي أسود مصري محضر على الطريقة التقليدية مع أوراق النعناع البلدي الطازج.",
     image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80",
     category: "drinks",
@@ -117,7 +118,7 @@ const menuItems: MenuItem[] = [
   {
     id: "dr3",
     name: "سحلب بالمكسرات وجوز الهند",
-    price: 4.50,
+    price: 60.00,
     description: "مشروب الحليب الساخن الكثيف بنكهة المستكة مزين بالفستق، اللوز، جوز الهند، والزبيب.",
     image: "https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=600&q=80",
     category: "drinks",
@@ -127,7 +128,7 @@ const menuItems: MenuItem[] = [
   {
     id: "dr4",
     name: "كركديه أسواني مثلج",
-    price: 3.00,
+    price: 40.00,
     description: "مشروب الكركديه المنعش المستخلص بارداً من بتلات الكركديه الأسواني الطبيعي.",
     image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80",
     category: "drinks",
@@ -138,9 +139,9 @@ const menuItems: MenuItem[] = [
   {
     id: "ds1",
     name: "طاجن أم علي بالقشطة",
-    price: 5.00,
+    price: 70.00,
     description: "رقائق العجين الهش المشرب بالحليب الساخن والمحلى، محشو بالمكسرات ومغطى بالقشطة والزبدة البلدية.",
-    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80",
+    image: "/images/om-ali.png",
     category: "desserts",
     calories: "450 سعرة حرارية",
     ingredients: "رقائق ميل فاي، حليب طازج، قشطة بلدي، لوز، بندق، زبيب، جوز هند، سكر",
@@ -148,9 +149,9 @@ const menuItems: MenuItem[] = [
   {
     id: "ds2",
     name: "أرز بلبن بالمستكة والفستق",
-    price: 4.00,
+    price: 55.00,
     description: "أرز بالحليب مطهو ببطء بنكهة المستكة وماء الورد، يقدم بارداً ومزيناً بالفستق الحلبي المطحون.",
-    image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80",
+    image: "/images/rice-pudding.png",
     category: "desserts",
     calories: "260 سعرة حرارية",
     ingredients: "أرز مصري، حليب طازج، قشطة، مستكة، ماء ورد، فستق حلبي مطحون",
@@ -282,8 +283,12 @@ function MenuContent() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white dark:bg-stone-900 rounded-2xl border border-stone-200/40 dark:border-stone-850/40 overflow-hidden shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300 flex flex-col justify-between group cursor-pointer"
+                className="bg-white dark:bg-stone-900 rounded-2xl border border-stone-200/40 dark:border-stone-850/40 overflow-hidden shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300 flex flex-col justify-between group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 rounded-2xl"
                 onClick={() => setSelectedItem(item)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedItem(item); } }}
+                tabIndex={0}
+                role="button"
+                aria-label={`عرض تفاصيل ${item.name}`}
               >
                 {/* Food Image with scale */}
                 <div className="relative w-full h-56 overflow-hidden">
@@ -295,7 +300,7 @@ function MenuContent() {
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-amber-600 dark:text-amber-400">
-                    £{item.price.toFixed(2)}
+                    {item.price.toFixed(0)} ج.م
                   </div>
                 </div>
 
@@ -334,108 +339,101 @@ function MenuContent() {
         </AnimatePresence>
       </motion.div>
 
-      {/* Detail Modal Component */}
-      <AnimatePresence>
+      {/* Detail Modal — uses shared Modal component for consistent centering */}
+      <Modal
+        isOpen={!!selectedItem}
+        onClose={() => setSelectedItem(null)}
+        maxWidthClass="max-w-2xl"
+        showCloseButton={false}
+        className="!overflow-hidden"
+      >
         {selectedItem && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedItem(null)}
-              className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md"
-            />
+          <div className="flex flex-col md:flex-row">
+            {/* Modal Image */}
+            <div className="relative w-full md:w-1/2 h-64 md:h-auto min-h-[280px] shrink-0">
+              <MenuFoodImage
+                src={selectedItem.image}
+                alt={selectedItem.name}
+                fill
+                className="object-cover"
+              />
+              {/* Mobile close button on image */}
+              <button
+                onClick={() => setSelectedItem(null)}
+                aria-label="إغلاق"
+                className="absolute top-3 left-3 md:hidden p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition backdrop-blur-sm"
+              >
+                <Scale size={14} className="sr-only" />
+                <span aria-hidden>✕</span>
+              </button>
+            </div>
 
-            {/* Modal Body */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-2xl bg-white dark:bg-stone-900 rounded-3xl overflow-hidden shadow-2xl z-50 flex flex-col md:flex-row border border-stone-200 dark:border-stone-800"
-            >
-              {/* Modal Image */}
-              <div className="relative w-full md:w-1/2 h-64 md:h-auto min-h-[250px]">
-                <MenuFoodImage
-                  src={selectedItem.image}
-                  alt={selectedItem.name}
-                  fill
-                  className="object-cover"
-                />
+            {/* Modal Details */}
+            <div className="w-full md:w-1/2 p-7 flex flex-col justify-between text-right space-y-5">
+              {/* Desktop Close Button */}
+              <div className="hidden md:flex justify-start">
                 <button
                   onClick={() => setSelectedItem(null)}
-                  className="absolute top-4 right-4 md:hidden p-2 bg-black/50 text-white hover:bg-black/70 rounded-full transition"
+                  aria-label="إغلاق"
+                  className="p-1.5 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-full text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 transition"
                 >
-                  <X size={16} />
+                  ✕
                 </button>
               </div>
 
-              {/* Modal Details */}
-              <div className="w-full md:w-1/2 p-8 flex flex-col justify-between text-right space-y-6">
-                {/* Desktop Close Button */}
-                <div className="hidden md:flex justify-end">
-                  <button
-                    onClick={() => setSelectedItem(null)}
-                    className="p-1 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-full text-stone-500 transition"
-                  >
-                    <X size={20} />
-                  </button>
-                </div>
+              <div className="space-y-3">
+                <span className="text-amber-600 font-bold text-xs uppercase tracking-wider">
+                  {categories.find((c) => c.id === selectedItem.category)?.name}
+                </span>
+                <h3 className="text-2xl font-extrabold text-stone-900 dark:text-white leading-tight">
+                  {selectedItem.name}
+                </h3>
+                <p className="text-stone-600 dark:text-stone-400 text-sm leading-relaxed">
+                  {selectedItem.description}
+                </p>
 
-                <div className="space-y-4">
-                  <span className="text-amber-500 font-bold text-xs uppercase tracking-wider">
-                    {categories.find((c) => c.id === selectedItem.category)?.name}
-                  </span>
-                  <h3 className="text-2xl font-extrabold text-stone-900 dark:text-white leading-tight">
-                    {selectedItem.name}
-                  </h3>
-                  <p className="text-stone-600 dark:text-stone-400 text-sm leading-relaxed">
-                    {selectedItem.description}
-                  </p>
-
-                  {/* Calories & Ingredients */}
-                  <div className="space-y-3 pt-3 border-t border-stone-100 dark:border-stone-800 text-xs text-stone-500 dark:text-stone-400">
-                    <div className="flex items-center gap-2">
-                      <Scale size={14} className="text-stone-400" />
-                      <span><strong>المكونات:</strong> {selectedItem.ingredients}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Flame size={14} className="text-red-500" />
-                      <span><strong>السعرات الحرارية:</strong> {selectedItem.calories}</span>
-                    </div>
+                {/* Calories & Ingredients */}
+                <div className="space-y-2 pt-3 border-t border-stone-100 dark:border-stone-800 text-xs text-stone-500 dark:text-stone-400">
+                  <div className="flex items-start gap-2">
+                    <Scale size={13} className="text-stone-400 mt-0.5 shrink-0" />
+                    <span><strong>المكونات:</strong> {selectedItem.ingredients}</span>
                   </div>
-                </div>
-
-                {/* Pricing and Action */}
-                <div className="flex items-center justify-between pt-4 border-t border-stone-100 dark:border-stone-800">
-                  <div>
-                    <span className="text-xs text-stone-400 block">السعر</span>
-                    <span className="text-2xl font-extrabold text-amber-600 dark:text-amber-400">
-                      £{selectedItem.price.toFixed(2)}
-                    </span>
+                  <div className="flex items-center gap-2">
+                    <Flame size={13} className="text-red-500 shrink-0" />
+                    <span><strong>السعرات الحرارية:</strong> {selectedItem.calories}</span>
                   </div>
-                  <button
-                    onClick={() => {
-                      addToCart({
-                        id: selectedItem.id,
-                        name: selectedItem.name,
-                        price: selectedItem.price,
-                        image: selectedItem.image,
-                        category: selectedItem.category,
-                      });
-                      setSelectedItem(null); // Close modal on add
-                    }}
-                    className="bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm px-6 py-3 rounded-full shadow-lg hover:shadow-amber-500/20 transition-all duration-300 flex items-center gap-2"
-                  >
-                    <ShoppingCart size={16} />
-                    أضف للطلب
-                  </button>
                 </div>
               </div>
-            </motion.div>
-          </>
+
+              {/* Pricing and Action */}
+              <div className="flex items-center justify-between pt-4 border-t border-stone-100 dark:border-stone-800">
+                <div>
+                  <span className="text-xs text-stone-400 block">السعر</span>
+                  <span className="text-2xl font-extrabold text-amber-600 dark:text-amber-400">
+                    {selectedItem.price.toFixed(2)} ج.م
+                  </span>
+                </div>
+                <button
+                  onClick={() => {
+                    addToCart({
+                      id: selectedItem.id,
+                      name: selectedItem.name,
+                      price: selectedItem.price,
+                      image: selectedItem.image,
+                      category: selectedItem.category,
+                    });
+                    setSelectedItem(null);
+                  }}
+                  className="bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm px-6 py-3 rounded-full shadow-lg hover:shadow-amber-500/20 transition-all duration-300 flex items-center gap-2"
+                >
+                  <ShoppingCart size={16} />
+                  أضف للطلب
+                </button>
+              </div>
+            </div>
+          </div>
         )}
-      </AnimatePresence>
+      </Modal>
     </div>
   );
 }

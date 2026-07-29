@@ -65,7 +65,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
             className="w-full lg:w-1/2 space-y-6 text-right"
           >
-            <span className="text-amber-500 font-bold uppercase tracking-wider text-xs md:text-sm">
+            <span className="text-amber-600 font-bold uppercase tracking-wider text-xs md:text-sm">
               قصتنا وهويتنا
             </span>
             <h2 className="text-3xl md:text-5xl font-extrabold text-stone-900 dark:text-white leading-tight font-serif">

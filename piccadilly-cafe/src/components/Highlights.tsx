@@ -32,7 +32,7 @@ export default function Highlights() {
     <section className="py-24 bg-stone-50 dark:bg-stone-900 text-stone-900 dark:text-stone-100 transition-colors duration-300">
       <div className="container mx-auto px-6 max-w-6xl">
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-          <span className="text-amber-500 font-bold uppercase tracking-wider text-xs md:text-sm">
+          <span className="text-amber-600 font-bold uppercase tracking-wider text-xs md:text-sm">
             أبرز ما نقدمه
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-stone-900 dark:text-white leading-tight font-serif">
@@ -78,7 +78,7 @@ export default function Highlights() {
                 <div className="pt-2">
                   <Link
                     href={card.link}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-amber-500 hover:text-amber-600 transition-colors"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-amber-600 hover:text-amber-700 transition-colors"
                   >
                     عرض القائمة <ArrowLeft size={14} className="mt-0.5" />
                   </Link>

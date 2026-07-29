@@ -13,7 +13,7 @@ export default function Hero() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('/images/باريستا لابس كمامة.webp')",
+            backgroundImage: "url('/images/barista-mask.webp')",
           }}
         />
         <div className="absolute inset-0 bg-stone-950/70" />

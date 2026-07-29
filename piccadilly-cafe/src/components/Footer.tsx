@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Clock } from "lucide-react";
 
@@ -46,10 +47,12 @@ export default function Footer() {
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
               {instagramPhotos.map((url, idx) => (
                 <div key={idx} className="relative aspect-square rounded-lg overflow-hidden group">
-                  <img
+                  <Image
                     src={url}
-                    alt={`Cafe image ${idx + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    alt={`صورة من ملاذ كافيه ${idx + 1}`}
+                    fill
+                    sizes="(max-width:640px) 33vw, 16vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
